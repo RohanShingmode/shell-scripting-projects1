@@ -1,5 +1,20 @@
 #!/bin/bash
 
+# This script is designed to list users with read access to a specified GitHub repository.
+# It uses the GitHub API to fetch the list of collaborators who have pull (read) access to the repository.
+
+# Function to check for the correct number of command-line arguments
+function helper {
+  expected_cmd_arg=2
+  if [ "$#" -ne "$expected_cmd_arg" ]; then
+    echo "Please execute the command with the required arguments."
+    exit 1
+  fi
+}
+
+# Check for the correct number of command-line arguments
+helper "$@"
+
 # GitHub API URL
 API_URL="https://api.github.com"
 
@@ -37,6 +52,5 @@ function list_users_with_read_access {
 }
 
 # Main script
-
 echo "Listing users with read access to ${REPO_OWNER}/${REPO_NAME}..."
 list_users_with_read_access
